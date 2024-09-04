@@ -758,14 +758,15 @@ void surf (Input IN, inout SurfaceOutputStandard o) {
 ```
 This is the heart of the shader. Instead of specifying exactly the colour value of the pixel, Unity defines a SurfaceOutputStandard structure. It has attributes such as Albedo (for colour) which you will set. Since we're working with lighting and shadows now, we don't just grab the colour directly, it needs to be calculated from values held in SurfaceOutputStandard. Here are all the attributes that are part of SurfaceOutputStandard:
 ```
-struct SurfaceOutput
+struct SurfaceOutputStandard
 {
-	fixed3 Albedo;  // diffuse color
-	fixed3 Normal;  // tangent space normal, if written
-	fixed3 Emission;
-	half Specular;  // specular power in 0..1 range
-	fixed Gloss;    // specular intensity
-	fixed Alpha;    // alpha for transparencies
+    fixed3 Albedo;      // base (diffuse or specular) color
+    fixed3 Normal;      // tangent space normal, if written
+    half3 Emission;
+    half Metallic;      // 0=non-metal, 1=metal
+    half Smoothness;    // 0=rough, 1=smooth
+    half Occlusion;     // occlusion (default 1)
+    fixed Alpha;        // alpha for transparencies
 };
 ```
 
